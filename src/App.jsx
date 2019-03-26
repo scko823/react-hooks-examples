@@ -35,7 +35,7 @@ class App extends Component {
 									<Link to="/use-reducer">useReducer</Link>
 								</li>
 								<li>
-									<Link to="">useCallback</Link>
+									<Link to="/use-callback">useCallback</Link>
 								</li>
 								<li>
 									<Link to="">useMemo</Link>
@@ -77,6 +77,7 @@ class App extends Component {
 												<Hooks.useReducer {...props} initCount={6} />
 											)}
 										/>
+										<Route path="/use-callback" component={Hooks.useCallback} />
 									</div>
 								);
 							}}

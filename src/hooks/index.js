@@ -14,3 +14,7 @@ export {
     default as useReducer
 }
 from './useReducer.jsx';
+export {
+    default as useCallback
+}
+from './useCallback.jsx';
