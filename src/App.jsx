@@ -32,7 +32,7 @@ class App extends Component {
 									<Link to="/use-context">useContext</Link>
 								</li>
 								<li>
-									<Link to="">useReducer</Link>
+									<Link to="/use-reducer">useReducer</Link>
 								</li>
 								<li>
 									<Link to="">useCallback</Link>
@@ -69,6 +69,12 @@ class App extends Component {
 													{...props}
 													changeTextAlign={this.chnageTextAlign}
 												/>
+											)}
+										/>
+										<Route
+											path="/use-reducer"
+											render={props => (
+												<Hooks.useReducer {...props} initCount={6} />
 											)}
 										/>
 									</div>

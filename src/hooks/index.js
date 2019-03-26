@@ -10,3 +10,7 @@ export {
     default as useContext
 }
 from './useContext.jsx';
+export {
+    default as useReducer
+}
+from './useReducer.jsx';
