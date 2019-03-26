@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as Hooks from './hooks';
 import './App.css';
 
+export const TextAlignContext = createContext('left');
 class App extends Component {
+	state = {
+		textAlign: 'left'
+	};
+	chnageTextAlign = () => {
+		this.setState(({ textAlign }) => {
+			const newState =
+				textAlign === 'left' ? 'center' : textAlign === 'center' ? 'right' : 'left';
+			return { textAlign: newState };
+		});
+	};
 	render() {
 		return (
 			<Router>
@@ -18,7 +29,7 @@ class App extends Component {
 									<Link to="/use-effect">useEffect</Link>
 								</li>
 								<li>
-									<Link to="">useContext</Link>
+									<Link to="/use-context">useContext</Link>
 								</li>
 								<li>
 									<Link to="">useReducer</Link>
@@ -44,10 +55,27 @@ class App extends Component {
 							</ul>
 						</nav>
 					</header>
-					<div className="Content">
-						<Route path="/use-state" component={Hooks.useState} />
-						<Route path="/use-effect" component={Hooks.useEffect} />
-					</div>
+					<TextAlignContext.Provider value={this.state.textAlign}>
+						<TextAlignContext.Consumer>
+							{value => {
+								return (
+									<div className="Content" style={{ textAlign: value }}>
+										<Route path="/use-state" component={Hooks.useState} />
+										<Route path="/use-effect" component={Hooks.useEffect} />
+										<Route
+											path="/use-context"
+											render={props => (
+												<Hooks.useContext
+													{...props}
+													changeTextAlign={this.chnageTextAlign}
+												/>
+											)}
+										/>
+									</div>
+								);
+							}}
+						</TextAlignContext.Consumer>
+					</TextAlignContext.Provider>
 				</div>
 			</Router>
 		);
