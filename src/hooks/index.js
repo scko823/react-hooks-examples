@@ -18,3 +18,7 @@ export {
     default as useCallback
 }
 from './useCallback.jsx';
+export {
+    default as useShout
+}
+from './allTogether.jsx';

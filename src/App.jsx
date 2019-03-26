@@ -38,19 +38,7 @@ class App extends Component {
 									<Link to="/use-callback">useCallback</Link>
 								</li>
 								<li>
-									<Link to="">useMemo</Link>
-								</li>
-								<li>
-									<Link to="">useRef</Link>
-								</li>
-								<li>
-									<Link to="">useImperativeHandle</Link>
-								</li>
-								<li>
-									<Link to="">useLayoutEffect</Link>
-								</li>
-								<li>
-									<Link to="">useDebugValue</Link>
+									<Link to="/use-shout">all together</Link>
 								</li>
 							</ul>
 						</nav>
@@ -78,6 +66,7 @@ class App extends Component {
 											)}
 										/>
 										<Route path="/use-callback" component={Hooks.useCallback} />
+										<Route path="/use-shout" component={Hooks.useShout} />
 									</div>
 								);
 							}}
