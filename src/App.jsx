@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
+import * as Hooks from './hooks';
 import './App.css';
 
 class App extends Component {
@@ -44,7 +44,9 @@ class App extends Component {
 							</ul>
 						</nav>
 					</header>
-					<Route path="/use-state" component={() => <h1>useState</h1>} />
+					<div className="Content">
+						<Route path="/use-state" component={Hooks.useState} />
+					</div>
 				</div>
 			</Router>
 		);
