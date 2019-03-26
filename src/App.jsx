@@ -15,7 +15,7 @@ class App extends Component {
 									<Link to="/use-state">useState</Link>
 								</li>
 								<li>
-									<Link to="">useEffect</Link>
+									<Link to="/use-effect">useEffect</Link>
 								</li>
 								<li>
 									<Link to="">useContext</Link>
@@ -46,6 +46,7 @@ class App extends Component {
 					</header>
 					<div className="Content">
 						<Route path="/use-state" component={Hooks.useState} />
+						<Route path="/use-effect" component={Hooks.useEffect} />
 					</div>
 				</div>
 			</Router>
