@@ -7,7 +7,7 @@ export default props => {
 	return (
 		<>
 			<h1>use Context</h1>
-			<di>current text align is set to: {textAlign}</di>
+			<div>current text align is set to: {textAlign}</div>
 			<div>
 				<button onClick={props.changeTextAlign}>toggle text align value</button>
 			</div>

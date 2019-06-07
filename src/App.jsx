@@ -4,9 +4,11 @@ import * as Hooks from './hooks';
 import './App.css';
 
 export const TextAlignContext = createContext('left');
+export const FormContext = createContext({});
 class App extends Component {
 	state = {
-		textAlign: 'left'
+		textAlign: 'left',
+		form: {}
 	};
 	chnageTextAlign = () => {
 		this.setState(({ textAlign }) => {
@@ -15,6 +17,14 @@ class App extends Component {
 			return { textAlign: newState };
 		});
 	};
+	changeForm = (name, formValue) => {
+		this.setState({
+			form: {
+				...this.state.form,
+				name: formValue
+			}
+		})
+	}
 	render() {
 		return (
 			<Router>
@@ -40,38 +50,48 @@ class App extends Component {
 								<li>
 									<Link to="/use-shout">all together</Link>
 								</li>
+								<li>
+									<Link to="/use-form">custom hook</Link>
+								</li>
 							</ul>
 						</nav>
 					</header>
-					<TextAlignContext.Provider value={this.state.textAlign}>
-						<TextAlignContext.Consumer>
-							{value => {
-								return (
-									<div className="Content" style={{ textAlign: value }}>
-										<Route path="/use-state" component={Hooks.useState} />
-										<Route path="/use-effect" component={Hooks.useEffect} />
-										<Route
-											path="/use-context"
-											render={props => (
-												<Hooks.useContext
-													{...props}
-													changeTextAlign={this.chnageTextAlign}
+					<FormContext.Provider value={{changeForm: this.changeForm, formValues: this.state.form}}>
+						<FormContext.Consumer>
+							{({formValues}) => 
+							<TextAlignContext.Provider value={this.state.textAlign}>
+								<TextAlignContext.Consumer>
+									{value => {
+										return (
+											<div className="Content" style={{ textAlign: value }}>
+												<Route path="/use-state" component={Hooks.useState} />
+												<Route path="/use-effect" component={Hooks.useEffect} />
+												<Route
+													path="/use-context"
+													render={props => (
+														<Hooks.useContext
+															{...props}
+															changeTextAlign={this.chnageTextAlign}
+														/>
+													)}
 												/>
-											)}
-										/>
-										<Route
-											path="/use-reducer"
-											render={props => (
-												<Hooks.useReducer {...props} initCount={6} />
-											)}
-										/>
-										<Route path="/use-callback" component={Hooks.useCallback} />
-										<Route path="/use-shout" component={Hooks.useShout} />
-									</div>
-								);
-							}}
-						</TextAlignContext.Consumer>
-					</TextAlignContext.Provider>
+												<Route
+													path="/use-reducer"
+													render={props => (
+														<Hooks.useReducer {...props} initCount={6} />
+													)}
+												/>
+												<Route path="/use-callback" component={Hooks.useCallback} />
+												<Route path="/use-shout" component={Hooks.useShout} />
+												<Route path="/use-form" render={props => <Hooks.useForm {...props} formValues={formValues}/>}  />
+											</div>
+										);
+									}}
+								</TextAlignContext.Consumer>
+							</TextAlignContext.Provider>
+							}
+						</FormContext.Consumer>
+					</FormContext.Provider>
 				</div>
 			</Router>
 		);
